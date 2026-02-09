@@ -1,4 +1,5 @@
 const express = require("express");
+const dotenv = require("dotenv")
 const bodyParser = require("body-parser");
 const corsMiddleware = require("./middlewares/cors");
 const errorHandlerMiddleware = require("./middlewares/errorHandler");
@@ -12,6 +13,8 @@ const adminController = require("./controllers/adminController");
 const limiter = require("./middlewares/rateLimiter");
 const router = express.Router();
 const app = express();
+
+dotenv.config();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

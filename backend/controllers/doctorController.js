@@ -10,6 +10,8 @@ router.get("/get-doctors", async (req, res) => {
 
     try {
       const doctors = await Doctor.find();
+      console.log(doctors);
+      
       res.json(doctors);
     } catch (error) {
       res.status(500).json({ error: error.message });

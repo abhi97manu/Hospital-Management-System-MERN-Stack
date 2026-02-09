@@ -5,7 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import UserSidebar from "./UserSidebar";
 
-
+const server_url = import.meta.env.VITE_SERVER_URL
 function UserBookAppointment() {
   const [userData, setuserData] = useState([]);
   const [userName, setName] = useState("");
@@ -37,7 +37,7 @@ function UserBookAppointment() {
       setEmail(user.email);
     };
     const fetchDoctors = async (e) => {
-      const res = await axios.get("https://hmsmern.onrender.com/doctor/get-doctors");
+      const res = await axios.get(`${server_url}/doctor/get-doctors`);
       setDoctors(res.data);
     };
 
@@ -49,7 +49,7 @@ function UserBookAppointment() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post('https://hmsmern.onrender.com/appointment/add-appointment', {
+      .post(`${server_url}/appointment/add-appointment`, {
         patient: userData.userName,
         phone: mobileNumber,
         doctor: doctor,

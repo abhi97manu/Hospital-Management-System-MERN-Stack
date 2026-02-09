@@ -6,6 +6,11 @@ import {motion } from "framer-motion";
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 
+const server_url = import.meta.env.VITE_SERVER_URL;
+
+
+
+
 function SignUp() {
     const [data, setData] = useState({
         userName:"",
@@ -21,7 +26,7 @@ function SignUp() {
       const handleSubmit = async (e) => {
         e.preventDefault();
         axios
-          .post("https://hmsmern.onrender.com/auth/register", data)
+          .post(`${server_url}/auth/register `, data)
           .then((res) => {
             if (res.data.message === "Success") {
               navigate("/sign-in");

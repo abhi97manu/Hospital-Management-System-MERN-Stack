@@ -13,6 +13,8 @@ import {motion } from "framer-motion";
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 
+const server_url = import.meta.env.VITE_SERVER_URL
+
 function DoctorAuth() {
 
   const { ref, inView } = useInView({
@@ -37,7 +39,7 @@ function DoctorAuth() {
     e.preventDefault();
     dispatch(loginProgress());
     axios.
-    post("https://hmsmern.onrender.com/auth/login", data)
+    post(`${server_url}/auth/login`, data)
     .then((res)=>{
       if(res.data.role === "doctor"){
         const user = res.data.user;

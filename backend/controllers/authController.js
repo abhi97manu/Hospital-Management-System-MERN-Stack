@@ -65,11 +65,14 @@ require("dotenv/config");
   
     try {
       let user, doctor, nurse;
-      let isPasswordValid = false;
+      let isPasswordValid = false; //HardCODED TRue
   
       user = await User.findOne({ email });
       doctor = await Doctor.findOne({ email });
       nurse = await Nurse.findOne({ email });
+
+    
+      
   
       if (user || doctor || nurse) {
 
@@ -80,16 +83,19 @@ require("dotenv/config");
         } else if (nurse) {
           isPasswordValid = await bcrypt.compare(password, nurse.password);
         }
+         console.log(user);
   
         if (isPasswordValid) {
           let token, role, loggedInUser;
           if (user) {
+            
             token = jwt.sign({ id: user._id, role: user.role }, process.env.jwtsecret, {
               expiresIn: "2d",
             });
             role = user.role;
             loggedInUser = user;
           } else if (doctor) {
+             
             token = jwt.sign({ id: doctor._id, role: doctor.role }, process.env.jwtsecret, {
               expiresIn: "2d",
             });

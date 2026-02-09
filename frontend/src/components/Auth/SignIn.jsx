@@ -13,6 +13,8 @@ import {motion } from "framer-motion";
 import { useInView } from 'react-intersection-observer';
 import { Link } from "react-router-dom";
 
+const server_url = import.meta.env.VITE_SERVER_URL
+
 function SignIn() {
   const [data, setData] = React.useState({
     email: "",
@@ -32,8 +34,10 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(loginProgress());
+
+    console.log(data);
     axios
-      .post("https://hmsmern.onrender.com/auth/login", data)
+      .post(`${server_url}/auth/login`, data)
       .then((res) => { 
   
         if (res.data.role === "patient") {
