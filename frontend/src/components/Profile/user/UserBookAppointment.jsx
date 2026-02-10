@@ -43,10 +43,13 @@ function UserBookAppointment() {
 
     fetchDoctors();
 
+
     fetchInfo();
   }, []);
 
   const handleSubmit = async (e) => {
+  
+    
     e.preventDefault();
     await axios
       .post(`${server_url}/appointment/add-appointment`, {

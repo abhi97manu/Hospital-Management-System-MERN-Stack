@@ -5,6 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import NurseSidebar from "./NurseSidebar";
 
+const server_url = import.meta.env.VITE_SERVER_URL
 function NurseMedication() {
   const [userData, setuserData] = useState([]);
   const [patients , setPatients] = useState([]);
@@ -27,7 +28,7 @@ function NurseMedication() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://hmsmern.onrender.com/user/get-users");
+        const response = await axios.get(`${server_url}/user/get-users`);
         setPatients(response.data);
         
       } catch (error) {
@@ -41,8 +42,9 @@ function NurseMedication() {
   }, []); 
 
   const handleAddMedication = async(e) =>{
+    
     e.preventDefault() ;
-    await axios.post(`https://hmsmern.onrender.com/user/add-medications/${changePatient}`,{name ,  frequency , dosage})
+    await axios.post(`${server_url}/user/add-medications/${changePatient}`,{name ,  frequency , dosage})
     .then((res) =>{
       Swal.fire({
         title: "Success",
@@ -76,9 +78,10 @@ function NurseMedication() {
                 onChange={(e) => setChangePatient(e.target.value)}
                 className="flex h-10 w-[90%] rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
               >
+                <option default disabled>Select Patient</option>
                 {patients.map((value , index) =>{
                   return(
-                    <option value={value.email}>{value.userName}</option>
+                    <option value={value.email} key = {index}>{value.userName}</option>
                   )
                 })}
               </select>

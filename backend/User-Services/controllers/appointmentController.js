@@ -19,9 +19,11 @@ router.get("/get-appointments/:email", async (req, res) => {
 
 router.get("/get-appointment/:id", async (req, res) => {
   const { id } = req.params;
+      console.log("id",id);
   try {
     const appointments = await Appointment.find({ doctor: id })
 
+    
     if (appointments.length === 0) { 
       res.json({ message: "No Appointments Booked!" });
     } else {

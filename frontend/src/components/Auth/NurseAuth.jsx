@@ -11,7 +11,7 @@ import {
 } from "../../redux/UserSlice.js";
 import {motion } from "framer-motion";
 import { useInView } from 'react-intersection-observer';
-
+const server_url = import.meta.env.VITE_SERVER_URL
 function NurseAuth() {
 
   const { ref, inView } = useInView({
@@ -38,7 +38,7 @@ function NurseAuth() {
     e.preventDefault();
     dispatch(loginProgress());
     axios
-      .post("https://hmsmern.onrender.com/auth/login", data)
+      .post(`${server_url}/auth/login`, data)
       .then((res) => {
         if (res.data.role === "nurse") {
           const user = res.data.user;

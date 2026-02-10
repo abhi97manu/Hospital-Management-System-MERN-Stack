@@ -71,10 +71,12 @@ router.get("/get-medications/:userEmail", async (req, res) => {
 });
 
 router.post('/add-medications/:userEmail', async (req, res) => {
+  
+  
   try {
     const { userEmail } = req.params;
     const { name, dosage, frequency } = req.body;
-
+console.log(userEmail);
 
     const user = await User.findOne({ email: userEmail });
     if (!user) {

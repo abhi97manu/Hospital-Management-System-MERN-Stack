@@ -5,18 +5,21 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import DoctorSidebar from "./DoctorSidebar";
 import { useSelector } from "react-redux";
-
+const server_url = import.meta.env.VITE_SERVER_URL
 function DoctorAppointmen() {
   const [appointments, setAppointments] = useState([]);
 
   const { currentUser } = useSelector((state) => state.user);
-
+ 
   useEffect(() => {
+   
+   
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://hmsmern.onrender.com/appointment/get-appointment/${currentUser._id}`
+          `${server_url}/appointment/get-appointment/${currentUser._id}`
         );
+         console.log(response);
         setAppointments(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import profiePic from '../../../assets/human6.jpg'
 import UserSidebar from './UserSidebar'
 import axios from 'axios';
-
+const server_url = import.meta.env.VITE_SERVER_URL
 function UserMedication() {
 
     const userData = JSON.parse(localStorage.getItem('user'))
@@ -14,7 +14,7 @@ function UserMedication() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`https://hmsmern.onrender.com/user/get-medications/${userData.email}`);
+          const response = await axios.get(`${server_url}/user/get-medications/${userData.email}`);
            
           const data = response.data;
           const medicationsArray = data.map(({ medications }) => medications);
